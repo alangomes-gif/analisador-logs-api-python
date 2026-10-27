@@ -18,3 +18,13 @@ Cada linha precisa conter: rota (texto iniciado em /), status (inteiro entre 100
 ## Limites
 
 Ferramenta local de análise de arquivos, sem monitoramento ao vivo, autenticação ou integração com plataformas de observabilidade. Não calcula percentis de latência. A leitura é linha a linha, mas o uso de memória dos contadores cresce com o número de rotas distintas. Não coloque tokens, endereços de clientes ou dados pessoais nos logs compartilhados.
+
+## Relatório HTML
+
+Depois de gerar o JSON, execute:
+
+    python relatorio_html.py relatorio.json --saida relatorio.html
+
+Abra relatorio.html no navegador. O arquivo mostra indicadores, códigos HTTP e rotas em tabelas, sem servidor ou dependências externas. Conteúdos variáveis são escapados antes de entrar no HTML. O gerador espera o formato do JSON produzido pelo analisador; não é um validador genérico de JSON.
+
+A suíte contém nove testes, incluindo exportação pelo CLI, preservação do log de entrada e escape de caracteres no HTML. Execute `python -m unittest -v`.
