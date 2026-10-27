@@ -24,6 +24,15 @@ class TestCLI(unittest.TestCase):
             self.assertEqual(resultado['latencia_media_ms'], 12.5)
             self.assertEqual(resultado['rotas'], {'/saúde': 1})
 
+    def test_nao_sobrescreve_log_de_entrada(self):
+        with tempfile.TemporaryDirectory() as pasta:
+            origem = Path(pasta) / 'entrada.jsonl'
+            conteudo = b'{"rota":"/api","status":200,"duracao_ms":10}\n'
+            origem.write_bytes(conteudo)
+            processo = subprocess.run([sys.executable, str(SCRIPT), str(origem), '--saida', str(origem)], capture_output=True, timeout=15)
+            self.assertEqual(processo.returncode, 2)
+            self.assertEqual(origem.read_bytes(), conteudo)
+
     def test_arquivo_ausente_nao_cria_relatorio(self):
         with tempfile.TemporaryDirectory() as pasta:
             destino = Path(pasta) / 'resultado.json'

@@ -54,6 +54,8 @@ if __name__ == '__main__':
     parser.add_argument('arquivo', help='Log JSONL, com um objeto JSON por linha')
     parser.add_argument('--saida', default='relatorio.json')
     argumentos = parser.parse_args()
+    if Path(argumentos.arquivo).resolve() == Path(argumentos.saida).resolve():
+        parser.error('Entrada e saída devem ser arquivos diferentes')
     relatorio = analisar(argumentos.arquivo)
     texto = json.dumps(relatorio, ensure_ascii=False, indent=2)
     Path(argumentos.saida).write_text(texto + '\n', encoding='utf-8')
