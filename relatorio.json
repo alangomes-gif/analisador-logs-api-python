@@ -1,0 +1,22 @@
+{
+  "requisicoes_validas": 10,
+  "linhas_invalidas": 1,
+  "respostas_4xx_5xx": 3,
+  "respostas_5xx": 1,
+  "percentual_4xx_5xx": 30.0,
+  "latencia_media_ms": 190.0,
+  "status_http": {
+    "200": 6,
+    "201": 1,
+    "401": 1,
+    "404": 1,
+    "500": 1
+  },
+  "rotas": {
+    "/estoque": 2,
+    "/login": 2,
+    "/pedidos": 2,
+    "/produtos": 3,
+    "/produtos/99": 1
+  }
+}
